@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+function install() {
+    # Run the osxprep.sh Script
+    echo ""
+    echo "------------------------------"
+    echo "Updating OSX and installing Xcode command line tools"
+    echo "------------------------------"
+    echo ""
+    ./osxprep.sh
+
+    # Run the brew.sh Script
+    echo ""
+    echo "------------------------------"
+    echo "Installing Homebrew along with some common formulae and apps."
+    echo "This might awhile to complete, as some formulae need to be installed from source."
+    echo "------------------------------"
+    echo ""
+    ./brew.sh
+
+    # Run the osx.sh Script
+    echo ""
+    echo "------------------------------"
+    echo "Setting sensible OSX defaults."
+    echo "------------------------------"
+    echo ""
+    ./osx.sh
+
+    # Run the programming Script
+    echo "------------------------------"
+    echo "Setting up development tools."
+    echo "------------------------------"
+    echo ""
+    ./programming.sh
+
+    echo "------------------------------"
+    echo "Complete! Restart your computer to ensure all updates take effect"
+    echo "------------------------------"
+}
+
+read -p "This script may overwrite existing files in your home directory. Are you sure? (y/n) " -n 1;
+echo "";
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    install $@
+fi;
+
+unset install;
